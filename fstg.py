@@ -4,7 +4,6 @@
 
 # Imports
 import pygame as pg
-import random
 
 # Constants
 BACKGROUND_COLOR = (0, 0, 0)
@@ -16,21 +15,11 @@ CHANGE_CAT = pg.event.custom_type()
 
 # Functions
 def main():
-    
-    # Start pygame
-    pg.init()
-
-    # Declare Variables
-    background_color_change_wait = False
-
-    # Initialize random
-    random.seed()
-
     # Create Main Window
-    MainWindow = pg.display.set_mode (BACKGROUND_SIZE)
+    MainWindow = pg.display.set_mode(BACKGROUND_SIZE)
     
     # Set caption
-    pg.display.set_caption ('Flower Sin: The Game')
+    pg.display.set_caption('Flower Sin: The Game')
     
     # Load Images
     IMAGE_CAT1 = pg.image.load('assets/cat1.jpeg').convert()
@@ -48,7 +37,7 @@ def main():
 
     # Begin game loop
     while True:
-        
+
         # Loop through the event cue
         for event in pg.event.get():
         
