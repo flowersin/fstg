@@ -8,7 +8,7 @@ import random
 
 # Constants
 BACKGROUND_COLOR = (0, 0, 0)
-BACKGROUND_SIZE = (1000, 1000)
+BACKGROUND_SIZE =(1000, 1000)
 
 # Custom events
 BACKGROUND_CAN_CHANGE_COLOR = pg.event.custom_type()
@@ -26,16 +26,20 @@ def main():
     random.seed()
 
     # Create Main Window
-    MainWindow = pg.display.set_mode (BACKGROUND_SIZE)
+    MainWindow = pg.display.set_mode(BACKGROUND_SIZE)
     
     # Set caption
-    pg.display.set_caption ('Flower Sin: The Game')
+    pg.display.set_caption('Flower Sin: The Game')
     
     # Fill screen with BACKGROUND_COLOR
     MainWindow.fill(BACKGROUND_COLOR)
-    
-    # Begin game loop
-    while True:
+
+    # update display using flip
+    pg.display.flip()
+
+    # Begin game loop while running is true
+    running = True
+    while running:
         
         # Loop through the event cue
         for event in pg.event.get():
