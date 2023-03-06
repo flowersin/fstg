@@ -2,12 +2,12 @@
 # Author: Elliot Schaefer
 # A (work in progress) game, that's for sure!
 
-# Imports
+# External imports
 import pygame as pg
+import random
 
-# Constants
-BACKGROUND_COLOR = (0, 0, 0)
-BACKGROUND_SIZE = (1000, 1000)
+# Internal Imports
+import game_display
 
 # Custom events
 BACKGROUND_CAN_CHANGE_COLOR = pg.event.custom_type()
@@ -15,21 +15,21 @@ CHANGE_CAT = pg.event.custom_type()
 
 # Functions
 def main():
-    # Create Main Window
-    MainWindow = pg.display.set_mode(BACKGROUND_SIZE)
-    
-    # Set caption
-    pg.display.set_caption('Flower Sin: The Game')
-    
+
+    # Initiate pygame
+    pg.init()
+
+    # Create a game display
+    main_display = game_display.Display()
+
     # Load Images
     IMAGE_CAT1 = pg.image.load('assets/cat1.jpeg').convert()
     IMAGE_CAT2 = pg.image.load('assets/cat2.jpeg').convert()
 
-    # Fill screen with BACKGROUND_COLOR
-    MainWindow.fill(BACKGROUND_COLOR)
+    background_color_change_wait = False
 
     # Display cat1.jpeg
-    MainWindow.blit(IMAGE_CAT1, (0, 0))
+    main_display.get_display().blit(IMAGE_CAT1, (0, 0))
     displayed_cat = 1
 
     # Start timer for cat switching
@@ -54,13 +54,11 @@ def main():
                 # Check if down key has been pressed
                 if event.key == pg.K_DOWN:
                     if background_color_change_wait == False:
-                        MainWindow.fill((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
+                        main_display.random_background_color()
                         pg.time.set_timer(BACKGROUND_CAN_CHANGE_COLOR, 1000)
                         background_color_change_wait = True
                     else:
-                        print('Wait!')
-
-
+                        print('Wait!') 
         
             # Update background_color_change_wait
             if (event.type == BACKGROUND_CAN_CHANGE_COLOR):
@@ -77,6 +75,7 @@ def main():
                 
                 # Reset the timer
                 pg.time.set_timer(CHANGE_CAT, 3000)
+
 
         # update display using flip
         pg.display.flip()
